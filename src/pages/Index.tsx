@@ -10,6 +10,9 @@ const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // For debugging the white screen issue
+    console.log("Index page rendering", { isAuthenticated, user });
+    
     if (isAuthenticated) {
       // Redirect to appropriate dashboard if already logged in
       if (user?.role === 'company') {
