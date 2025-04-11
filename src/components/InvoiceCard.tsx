@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { FileText, ExternalLink } from "lucide-react";
 import { Invoice, createEscrow, releasePayment } from "@/lib/mockData";
 import { useState } from "react";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 
 interface InvoiceCardProps {
