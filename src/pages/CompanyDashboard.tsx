@@ -5,7 +5,6 @@ import { Navbar } from "@/components/Navbar";
 import { useAuth } from "@/context/AuthContext";
 import { InvoiceForm } from "@/components/InvoiceForm";
 import { InvoiceList } from "@/components/InvoiceList";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 
@@ -49,7 +48,7 @@ const CompanyDashboard = () => {
             <div>
               <h2 className="text-lg font-medium mb-4">All Invoices</h2>
               <Separator className="mb-6" />
-              <InvoiceList refreshTrigger={refreshTrigger} />
+              <InvoiceList refreshTrigger={refreshTrigger} status="all" />
             </div>
           </TabsContent>
           
@@ -60,8 +59,7 @@ const CompanyDashboard = () => {
               <p className="text-sm text-muted-foreground mb-6">
                 These invoices are waiting for buyer approval or payment.
               </p>
-              {/* We would normally filter by status here */}
-              <InvoiceList refreshTrigger={refreshTrigger} />
+              <InvoiceList refreshTrigger={refreshTrigger} status="pending" />
             </div>
           </TabsContent>
           
@@ -72,8 +70,7 @@ const CompanyDashboard = () => {
               <p className="text-sm text-muted-foreground mb-6">
                 These invoices have been approved and paid.
               </p>
-              {/* We would normally filter by status here */}
-              <InvoiceList refreshTrigger={refreshTrigger} />
+              <InvoiceList refreshTrigger={refreshTrigger} status="completed" />
             </div>
           </TabsContent>
         </Tabs>

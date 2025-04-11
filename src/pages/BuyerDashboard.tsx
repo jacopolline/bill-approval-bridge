@@ -39,7 +39,7 @@ const BuyerDashboard = () => {
             <div>
               <h2 className="text-lg font-medium mb-4">All Invoices</h2>
               <Separator className="mb-6" />
-              <InvoiceList />
+              <InvoiceList status="all" />
             </div>
           </TabsContent>
           
@@ -50,8 +50,7 @@ const BuyerDashboard = () => {
               <p className="text-sm text-muted-foreground mb-6">
                 These invoices are waiting for your approval.
               </p>
-              {/* We would normally filter by status here */}
-              <InvoiceList />
+              <InvoiceList status="pending" />
             </div>
           </TabsContent>
           
@@ -62,8 +61,7 @@ const BuyerDashboard = () => {
               <p className="text-sm text-muted-foreground mb-6">
                 These invoices have been approved and are awaiting confirmation of receipt.
               </p>
-              {/* We would normally filter by status here */}
-              <InvoiceList />
+              <InvoiceList status="approved" />
             </div>
           </TabsContent>
         </Tabs>

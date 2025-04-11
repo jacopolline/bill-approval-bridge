@@ -6,9 +6,10 @@ import { useAuth } from "@/context/AuthContext";
 
 interface InvoiceListProps {
   refreshTrigger?: number;
+  status?: "pending" | "approved" | "completed" | "all";
 }
 
-export function InvoiceList({ refreshTrigger = 0 }: InvoiceListProps) {
+export function InvoiceList({ refreshTrigger = 0, status = "all" }: InvoiceListProps) {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const { user } = useAuth();
   
@@ -16,23 +17,36 @@ export function InvoiceList({ refreshTrigger = 0 }: InvoiceListProps) {
     const allInvoices = getInvoices();
     
     // Filter invoices based on user role
+    let filteredInvoices = allInvoices;
+    
+    // Filter by user role
     if (user?.role === 'company') {
-      setInvoices(allInvoices.filter(invoice => invoice.companyId === user.id));
-    } else {
-      // For buyers, show all invoices
-      setInvoices(allInvoices);
+      filteredInvoices = allInvoices.filter(invoice => invoice.companyId === user.id);
     }
-  }, [user, refreshTrigger]);
+    
+    // Filter by status if not "all"
+    if (status !== "all") {
+      filteredInvoices = filteredInvoices.filter(invoice => invoice.status === status);
+    }
+    
+    setInvoices(filteredInvoices);
+  }, [user, refreshTrigger, status]);
 
   const handleStatusChange = () => {
     // Refresh invoices after status change
     const allInvoices = getInvoices();
     
+    let filteredInvoices = allInvoices;
+    
     if (user?.role === 'company') {
-      setInvoices(allInvoices.filter(invoice => invoice.companyId === user.id));
-    } else {
-      setInvoices(allInvoices);
+      filteredInvoices = allInvoices.filter(invoice => invoice.companyId === user.id);
     }
+    
+    if (status !== "all") {
+      filteredInvoices = filteredInvoices.filter(invoice => invoice.status === status);
+    }
+    
+    setInvoices(filteredInvoices);
   };
 
   if (invoices.length === 0) {
