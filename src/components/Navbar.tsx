@@ -11,7 +11,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileText className="h-6 w-6 text-primary" />
-          <span className="font-semibold text-lg">Bill Approval Bridge</span>
+          <span className="font-semibold text-lg">The StableBridge</span>
         </div>
         
         {user && (
