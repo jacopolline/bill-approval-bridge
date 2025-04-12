@@ -8,6 +8,9 @@ export interface Invoice {
   companyName: string;
   status: 'pending' | 'approved' | 'completed';
   pdfUrl?: string;
+  currency?: string;
+  issuerWallet?: string;
+  recipientWallet?: string;
 }
 
 // Mock invoices
