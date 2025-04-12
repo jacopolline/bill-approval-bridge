@@ -1,10 +1,9 @@
-
+import React, { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, ExternalLink, Calendar, DollarSign, CheckCircle, Clock } from "lucide-react";
+import { FileText, ExternalLink, Calendar, CheckCircle, Clock } from "lucide-react";
 import { Invoice, createEscrow, releasePayment } from "@/lib/mockData";
-import { useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 
@@ -74,8 +73,7 @@ export function InvoiceCard({ invoice, onStatusChange }: InvoiceCardProps) {
           </div>
           
           <div className="mt-2 space-y-1">
-            <p className="text-2xl font-bold text-primary flex items-center gap-1">
-              <DollarSign size={20} className="inline" />
+            <p className="text-2xl font-bold text-primary">
               {formatCurrency(invoice.amount)}
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-1">
