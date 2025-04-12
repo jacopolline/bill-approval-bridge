@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { 
   Select,
   SelectContent,
@@ -60,9 +59,6 @@ const formSchema = z.object({
   name: z.string().min(1, "Invoice name is required"),
   amount: z.string().min(1, "Amount is required"),
   currency: z.string().min(1, "Currency is required"),
-  issuerWallet: z.string()
-    .min(1, "Issuer wallet address is required")
-    .regex(rippleAddressRegex, "Invalid Ripple wallet address"),
   recipientWallet: z.string()
     .min(1, "Recipient wallet address is required")
     .regex(rippleAddressRegex, "Invalid Ripple wallet address"),
@@ -78,7 +74,6 @@ export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
       name: "",
       amount: "",
       currency: "",
-      issuerWallet: "",
       recipientWallet: "",
     }
   });
@@ -94,7 +89,7 @@ export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
       companyName: user.name,
       // Additional data not in the mockData model, but could be used later
       currency: values.currency,
-      issuerWallet: values.issuerWallet,
+      issuerWallet: user.walletAddress, // Use company wallet address from user context
       recipientWallet: values.recipientWallet
     });
     
@@ -196,25 +191,8 @@ export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
             
             <div className="space-y-4">
               <div className="flex items-center">
-                <h3 className="text-sm font-medium">Stablecoin Wallets</h3>
+                <h3 className="text-sm font-medium">Recipient Information</h3>
               </div>
-              
-              <FormField
-                control={form.control}
-                name="issuerWallet"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Issuer Wallet Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g. rhmvEzvUV3Eteb59goWeWhJkxU1a6k5tFK"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               
               <FormField
                 control={form.control}
