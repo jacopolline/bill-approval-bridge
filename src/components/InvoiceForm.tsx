@@ -51,8 +51,9 @@ const currencies = [
   { value: "CNY", label: "CNY - Chinese Yuan" },
 ];
 
-// Ethereum address regex pattern (0x followed by 40 hex characters)
-const ethereumAddressRegex = /^0x[a-fA-F0-9]{40}$/;
+// Ripple wallet address regex pattern 
+// Must start with 'r', contain only alphanumeric characters, and be between 25-35 characters
+const rippleAddressRegex = /^r[a-zA-Z0-9]{24,34}$/;
 
 // Form schema with validation
 const formSchema = z.object({
@@ -61,10 +62,10 @@ const formSchema = z.object({
   currency: z.string().min(1, "Currency is required"),
   issuerWallet: z.string()
     .min(1, "Issuer wallet address is required")
-    .regex(ethereumAddressRegex, "Invalid wallet address format"),
+    .regex(rippleAddressRegex, "Invalid Ripple wallet address"),
   recipientWallet: z.string()
     .min(1, "Recipient wallet address is required")
-    .regex(ethereumAddressRegex, "Invalid wallet address format"),
+    .regex(rippleAddressRegex, "Invalid Ripple wallet address"),
 });
 
 export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
@@ -206,7 +207,7 @@ export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
                     <FormLabel>Issuer Wallet Address</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter issuer's stablecoin wallet address"
+                        placeholder="e.g. rhmvEzvUV3Eteb59goWeWhJkxU1a6k5tFK"
                         {...field}
                       />
                     </FormControl>
@@ -223,7 +224,7 @@ export function InvoiceForm({ onInvoiceAdded }: InvoiceFormProps) {
                     <FormLabel>Recipient Wallet Address</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter recipient's stablecoin wallet address"
+                        placeholder="e.g. rhmvEzvUV3Eteb59goWeWhJkxU1a6k5tFK"
                         {...field}
                       />
                     </FormControl>
