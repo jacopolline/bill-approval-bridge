@@ -48,7 +48,7 @@ export function InvoiceCard({ invoice, onStatusChange }: InvoiceCardProps) {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', { 
       style: 'currency', 
-      currency: 'EUR' 
+      currency: invoice.currency || 'EUR' 
     }).format(amount);
   };
 
